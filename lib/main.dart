@@ -1,4 +1,7 @@
+import 'package:expenses_app/transaction.dart';
 import "package:flutter/material.dart";
+import "./transaction.dart";
+import "./transactionCard.dart";
 
 void main() => runApp(MyApp());
 
@@ -18,6 +21,21 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   final String appBarTitle;
 
+  final List<Transaction> transactions = [
+    Transaction(
+      id: "T1",
+      title: "New Hardware",
+      amount: 178.99,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "T2",
+      title: "New Machine",
+      amount: 2999.99,
+      date: DateTime.now(),
+    )
+  ];
+
   HomePageState({this.appBarTitle});
 
   @override
@@ -29,7 +47,7 @@ class HomePageState extends State<HomePage> {
       body: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget> [
+        children: <Widget>[
           Container(
             width: 360,
             child: Card(
@@ -38,20 +56,14 @@ class HomePageState extends State<HomePage> {
               elevation: 5.0,
             ),
           ),
-          Row(
-            children: <Widget>[
-              Container(
-                height: 621,
-                width: 50,
-                child: Card(
-                  child: Text("This is main axis on Column"),
-                  color: Colors.red,
-                  elevation: 5.0,
-                ),
-              ),
-            ],
-          )
-
+          Column(
+              children: transactions.map((transaction) {
+            return TransactionCard(
+              title: transaction.title,
+              amount: transaction.amount,
+              date: transaction.date,
+            );
+          }).toList()),
         ],
       ),
     );
