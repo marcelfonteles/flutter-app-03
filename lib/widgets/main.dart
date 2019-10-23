@@ -1,7 +1,6 @@
 import './user_transactions.dart';
 import "package:flutter/material.dart";
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -30,11 +29,22 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(appBarTitle),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          )
+        ],
       ),
       body: Column(
         children: <Widget>[
           UserTransactions(),
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }
