@@ -1,12 +1,17 @@
 import "package:flutter/material.dart";
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
+  final Function newTransactionHandler;
+  NewTransaction(this.newTransactionHandler);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
 
-  final Function newTransactionHandler;
-
-  NewTransaction(this.newTransactionHandler);
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -16,40 +21,44 @@ class NewTransaction extends StatelessWidget {
       return ;
     }
 
-    newTransactionHandler(
+    widget.newTransactionHandler(
       enteredTitle,
       enteredAmount,
     );
+
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          TextField(
-            controller: titleController,
-            onSubmitted: (_) => submitData,
-            decoration: InputDecoration(
-              labelText: "Title",
+    return Container(
+      child: Card(
+        elevation: 5.0,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            TextField(
+              controller: titleController,
+              onSubmitted: (_) => submitData,
+              decoration: InputDecoration(
+                labelText: "Title",
+              ),
             ),
-          ),
-          TextField(
-            controller: amountController,
-            keyboardType: TextInputType.number,
-            onSubmitted: (_) => submitData,
-            decoration: InputDecoration(
-              labelText: "Amount",
+            TextField(
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData,
+              decoration: InputDecoration(
+                labelText: "Amount",
+              ),
             ),
-          ),
-          FlatButton(
-            child: Text("Add Transaction"),
-            textColor: Colors.purple,
-            onPressed: submitData,
-          )
-        ],
+            FlatButton(
+              child: Text("Add Transaction"),
+              textColor: Colors.purple,
+              onPressed: submitData,
+            )
+          ],
+        ),
       ),
     );
   }
