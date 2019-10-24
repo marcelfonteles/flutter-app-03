@@ -17,7 +17,7 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
-## Some Widgets \
+## Some Widgets
 - Stack
 - SizedBox (to put some space)
 - FractionallySizedBox (to put some space in %)
