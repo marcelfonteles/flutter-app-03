@@ -10,7 +10,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 600,
+      height: 400,
       child: ListView.builder(
         itemCount: _userTransactions.length,
         itemBuilder: (BuildContext context, int index) {
@@ -43,10 +43,7 @@ class TransactionList extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       _userTransactions[index].title,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.title,
                     ),
                     Text(
                       DateFormat("dd/MM/yyyy - HH:mm").format(_userTransactions[index].date),
