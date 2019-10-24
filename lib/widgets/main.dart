@@ -57,20 +57,57 @@ class HomePageState extends State<HomePage> {
   HomePageState({this.appBarTitle});
 
   final List<Transaction> _userTransactions = [
-    Transaction(id: 'T1', title: 'New Hardware', amount: 1289.99, date: DateTime.now().subtract(Duration(days: 1))),
-    Transaction(id: 'T2', title: 'New Sneakers', amount: 289.99, date: DateTime.now().subtract(Duration(days: 2))),
-    Transaction(id: 'T3', title: 'New Phone', amount: 1589.99, date: DateTime.now().subtract(Duration(days: 2))),
-    Transaction(id: 'T4', title: 'New Notebook', amount: 89.99, date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(id: 'T5', title: 'New Shoes', amount: 199.99, date: DateTime.now().subtract(Duration(days: 4))),
-    Transaction(id: 'T6', title: 'New Pants', amount: 89.99, date: DateTime.now().subtract(Duration(days: 5))),
-    Transaction(id: 'T7', title: 'New Smartphone', amount: 1589.99, date: DateTime.now().subtract(Duration(days: 6))),
-    Transaction(id: 'T8', title: 'New Headphones', amount: 289.99, date: DateTime.now().subtract(Duration(days: 7))),
-    Transaction(id: 'T9', title: 'New Something', amount: 1289.99, date: DateTime.now().subtract(Duration(days: 5))),
+    Transaction(
+        id: 'T1',
+        title: 'New Hardware',
+        amount: 1289.99,
+        date: DateTime.now().subtract(Duration(days: 1))),
+    Transaction(
+        id: 'T2',
+        title: 'New Sneakers',
+        amount: 289.99,
+        date: DateTime.now().subtract(Duration(days: 2))),
+    Transaction(
+        id: 'T3',
+        title: 'New Phone',
+        amount: 1589.99,
+        date: DateTime.now().subtract(Duration(days: 2))),
+    Transaction(
+        id: 'T4',
+        title: 'New Notebook',
+        amount: 89.99,
+        date: DateTime.now().subtract(Duration(days: 3))),
+    Transaction(
+        id: 'T5',
+        title: 'New Shoes',
+        amount: 199.99,
+        date: DateTime.now().subtract(Duration(days: 4))),
+    Transaction(
+        id: 'T6',
+        title: 'New Pants',
+        amount: 89.99,
+        date: DateTime.now().subtract(Duration(days: 5))),
+    Transaction(
+        id: 'T7',
+        title: 'New Smartphone',
+        amount: 1589.99,
+        date: DateTime.now().subtract(Duration(days: 6))),
+    Transaction(
+        id: 'T8',
+        title: 'New Headphones',
+        amount: 289.99,
+        date: DateTime.now().subtract(Duration(days: 7))),
+    Transaction(
+        id: 'T9',
+        title: 'New Something',
+        amount: 1289.99,
+        date: DateTime.now().subtract(Duration(days: 5))),
   ];
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((transaction) {
-      return transaction.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+      return transaction.date
+          .isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
   }
 

@@ -10,7 +10,9 @@ class Chart extends StatelessWidget {
   Chart(this.recentTransactions);
 
   List<Map<String, Object>> get groupedTransactionValues {
-    return List.generate(7, (index) {
+    return List.generate(
+      7,
+      (index) {
         final weekDay = DateTime.now().subtract(
           Duration(days: index),
         );
@@ -28,32 +30,41 @@ class Chart extends StatelessWidget {
         print(totalSum);
 
         return {
-          'day': DateFormat.E().format(weekDay).substring(0,  1),
+          'day': DateFormat.E().format(weekDay).substring(0, 1),
           'amount': totalSum,
         };
       },
     );
   }
 
+  double get maxSpending {
+    return groupedTransactionValues.fold(0.0, (sum, item) {
+      return sum + item['amount'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(groupedTransactionValues);
     return Card(
-      elevation: 6.0,
-      margin: EdgeInsets.all(20),
-      child: Row(
-        children: <Widget>[
-          Row(
+        elevation: 6.0,
+        margin: EdgeInsets.all(20),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: groupedTransactionValues.map((data) {
               //return Text("${data['day']}: ${data['amount']}");
-              return ChartBar(
-                  label: data['day'],
-                  spendingAmount: data['amount'],
-                  spendingPctOfTotal: 0.65);
+              return Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                    label: data['day'],
+                    spendingAmount: data['amount'],
+                    spendingPctOfTotal: maxSpending == 0.0
+                        ? 0.0
+                        : (data['amount'] as double) / maxSpending),
+              );
             }).toList(),
-          )
-        ],
-      ),
-    );
+          ),
+        ),);
   }
 }
