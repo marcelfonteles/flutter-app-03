@@ -10,51 +10,28 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 380,
       child: ListView.builder(
         itemCount: _userTransactions.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
-            elevation: 3.0,
-            child: Row(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Theme.of(context).primaryColor,
-                      width: 2,
-                    ),
-                  ),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    "\$${_userTransactions[index].amount.toStringAsFixed(2)} ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Theme.of(context).primaryColorDark),
+            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            elevation: 5,
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                child: Padding(
+                  padding: EdgeInsets.all(6),
+                  child: FittedBox(
+                    child: Text('\$${_userTransactions[index].amount}'),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      _userTransactions[index].title,
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                    Text(
-                      DateFormat("dd/MM/yyyy - HH:mm").format(_userTransactions[index].date),
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                )
-              ],
+              ),
+              title: Text(
+                _userTransactions[index].title,
+                style: Theme.of(context).textTheme.title,
+              ),
+              subtitle: Text(DateFormat("dd/MM/yyyy").format(_userTransactions[index].date)),
             ),
           );
         },

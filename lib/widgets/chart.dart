@@ -14,7 +14,7 @@ class Chart extends StatelessWidget {
       7,
       (index) {
         final weekDay = DateTime.now().subtract(
-          Duration(days: index),
+          Duration(days: 6-index),
         );
         double totalSum = 0.0;
 
@@ -30,7 +30,7 @@ class Chart extends StatelessWidget {
         print(totalSum);
 
         return {
-          'day': DateFormat.E().format(weekDay).substring(0, 1),
+          'day': DateFormat.E().format(weekDay).substring(0, 2),
           'amount': totalSum,
         };
       },
