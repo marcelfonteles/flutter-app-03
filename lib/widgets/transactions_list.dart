@@ -3,17 +3,19 @@ import "package:intl/intl.dart";
 import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
-  final List<Transaction> _userTransactions;
+  final List<Transaction> userTransactions;
+  final Function deleteTransactionHandler;
 
-  TransactionList(this._userTransactions);
-
+  TransactionList({
+    this.userTransactions,
+    this.deleteTransactionHandler,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 380,
       child: ListView.builder(
-        itemCount: _userTransactions.length,
+        itemCount: userTransactions.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
@@ -24,15 +26,21 @@ class TransactionList extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(6),
                   child: FittedBox(
-                    child: Text('\$${_userTransactions[index].amount}'),
+                    child: Text('\$${userTransactions[index].amount}'),
                   ),
                 ),
               ),
               title: Text(
-                _userTransactions[index].title,
+                userTransactions[index].title,
                 style: Theme.of(context).textTheme.title,
               ),
-              subtitle: Text(DateFormat("dd/MM/yyyy").format(_userTransactions[index].date)),
+              subtitle: Text(DateFormat("dd/MM/yyyy")
+                  .format(userTransactions[index].date)),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                color: Theme.of(context).errorColor,
+                onPressed: () => deleteTransactionHandler(index, userTransactions),
+              ),
             ),
           );
         },
@@ -40,3 +48,20 @@ class TransactionList extends StatelessWidget {
     );
   }
 }
+
+/*
+              FlatButton(
+                onPressed: () =>
+                    deleteTransactionHandler(index, userTransactions),
+                child: Container(
+                  padding: EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(237, 94, 104, 1),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+ */

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
-          button: TextStyle(color: Colors.white),
+              button: TextStyle(color: Colors.white),
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -138,6 +138,12 @@ class HomePageState extends State<HomePage> {
     );
   }
 
+  void _deleteTransactionHandler(int index, List<Transaction> transactions) {
+    setState(() {
+      transactions.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,7 +182,12 @@ class HomePageState extends State<HomePage> {
                     ),
                   ],
                 )
-              : TransactionList(_userTransactions),
+              : Expanded(
+            child: TransactionList(
+              userTransactions: _userTransactions,
+              deleteTransactionHandler: _deleteTransactionHandler,
+            ),
+          ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
