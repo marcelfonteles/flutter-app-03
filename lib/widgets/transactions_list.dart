@@ -7,6 +7,7 @@ class TransactionList extends StatelessWidget {
 
   TransactionList(this._userTransactions);
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
